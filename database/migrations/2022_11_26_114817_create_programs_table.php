@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('feeder_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->dateTime('dateP');
             $table->timestamps();
         });
     }

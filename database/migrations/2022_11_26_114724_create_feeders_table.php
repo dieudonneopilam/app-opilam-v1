@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('feeders', function (Blueprint $table) {
             $table->id();
+            $table->mediumText('designation');
+            $table->mediumText('ip');
+            $table->integer('value');
             $table->timestamps();
         });
     }

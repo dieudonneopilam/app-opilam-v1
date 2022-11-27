@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('horaires', function (Blueprint $table) {
             $table->id();
+            $table->time('HeureDebut');
+            $table->time('HeureFin');
+            $table->mediumText('Type');
+            $table->foreignId('feeder_id')->constrained();
             $table->timestamps();
         });
     }
