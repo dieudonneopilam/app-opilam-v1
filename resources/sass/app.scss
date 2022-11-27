@@ -17,6 +17,12 @@
 body{
     background-color: white;
 }
+// @media screen and (min-width:700px)  and (max-width:900px) {
+//     .main{
+//         width: 60%;
+//         margin: auto;
+//     }
+// }
 .header{
     display: flex;
     justify-content: space-between;
@@ -31,7 +37,15 @@ body{
     .div-logo{
         display: flex;
         justify-content: left;
-        background-color: red;
+        align-items: center;
+    }
+    .logo-img{
+        height: 30px;
+        width: 30px;
+        border-radius: 30px;
+        object-fit: cover;
+        object-position: center;
+        margin-right: 5px;
     }
     .div-profil{
         display: flex;
@@ -204,18 +218,28 @@ body{
 }
 //agents
 .agents{
+    @media  screen and (min-width:700px)  {
+        width: 60%;
+        margin: 0 20%;
+    }
     .head{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0 5%;
+        width: 90%;
+        margin: auto;
         align-items: center;
         margin-bottom: 10px;
         height: 50px;
     }
     .content{
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 90%;
         padding: 0 5%;
+        margin: auto;
         margin-top: 30px;
     }
     .div-content:first-child{
@@ -223,57 +247,100 @@ body{
     }
     .div-content{
         display: flex;
+        flex-direction: column;
         width: 100%;
         border-radius: 5px;
-        box-shadow: 1px 1px 3px gray;
         margin-bottom: 10px;
-        padding: 5px;
+        box-shadow: 1px 1px 5px rgb(228, 228, 228);
+        padding: 5%;
         overflow-x: auto;
+        @media  screen and (min-width:800px) {
+            width: 30%;
+        }
+        @media  screen and (min-width:700px) {
+            width: 49%;
+        }
+
     }
     .picture{
         height: 100px;
-        margin-right: 2px;
-        border-radius: 2px;
+        object-fit: cover;
         width: 100px;
+        margin: auto;
+        border-radius: 100%;
+        @media  screen and (min-width:700px) {
+            height: 100px;
+            object-fit: cover;
+            width: 100px;
+            margin: auto;
+            border-radius: 100%;
+        }
     }
     .div-btn{
         display: flex;
         justify-content: space-around;
+        flex-wrap: wrap;
+
     }
     .edit{
         color: blue;
     }
-    .delete{
-        color: red;
-    }
-    .action{
-        color: rgb(207, 22, 173);
-    }
-    .action,
-    .delete,
-    .edit{
-        display: inline-block;
-        height: 35px;
-        width: 35px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 1px 1px 3px gray;
-        padding: 5px;
-        margin-bottom: 5px;
-        svg{
-            display: inline-block;
 
+    .delete{
+        display: block;
+        background-color: rgb(239, 239, 239);
+        height: 40px;
+        border-radius: 5px;
+        text-align: center;
+        padding: auto auto;
+        width: 100px;
+        font-size: 16px;
+        padding: 10px;
+        margin: 5px;
+        font-weight: bold;
+        color: black;
+        @media  screen and (min-width:800px) {
+            width: 100px;
+        }
+        @media  screen and (min-width:700px) {
+            width: 100%;
+        }
+
+    }
+    .edit{
+        display: block;
+        background-color: rgb(24, 136, 216);
+        height: 40px;
+        font-size: 16px;
+        border-radius: 5px;
+        color: white;
+        text-align: center;
+        padding: auto auto;
+        width: 100px;
+        padding: 10px;
+        margin: 5px;
+        font-weight: bold;
+        @media  screen and (min-width:800px) {
+            width: 100px;
+        }
+        @media  screen and (min-width:700px) {
+            width: 100%;
         }
     }
     .names{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
     .name-agent{
-        padding: 5px;
-        font-size: 24px;
+        margin: 10px;
+        text-align: center;
+        font-size:16px;
         font-family: sans-serif;
+        font-weight: bold;
+        width: 100%;
     }
     //feeder
     .agent-feeder{
@@ -324,9 +391,16 @@ body{
 //add-agent
 .add-agent{
     width: 100%;
+    @media  screen and (min-width:700px)  {
+        width: 60%;
+        margin: 0 20%;
+    }
     .head{
         padding: 5px 10%;
         width: 100%;
+        @media  screen and (min-width:700px)  {
+            padding: 5px 0;
+        }
     }
     .head-edit-agent,
     .head-add-agent{
@@ -334,40 +408,67 @@ body{
         justify-content: space-between;
         align-items: center;
     }
+    .head-edit-agent{
+        padding: 0;
+        width: 100%;
+    }
     .title-add-agent{
-        width: 80%;
+        width: 90%;
+        display: inline-block;
+        text-align: right;
     }
     .title{
         font-size: 20px;
         font-family: 'Roboto',sans-serif;
         color: blue;
+        @media  screen and (min-width:700px)  {
+            margin-right: 15px;
+        }
     }
     .retour{
         display: block;
         width: 40px;
     }
     //edit
-    .img-edit{
+    .title-edit-agent{
+        margin: 0;
+    }
+    .p-image-edit{
         width: 100%;
-        height: auto;
-        margin: 10px 0;
+        display: flex;
+        justify-content: left;
+    }
+    .img-edit{
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+        margin: auto;
     }
     form{
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
     }
     .group-form{
         width: 100%;
         padding: 3px 10%;
+        @media  screen and (min-width:700px)  {
+            width: 50%;
+            padding: 3px 10px;
+        }
     }
     .group-form-btn{
         margin-top: 10px;
+        width: 100%;
     }
     .input-form{
         width: 100%;
         height: 50px;
-        border: 1px solid rgb(223, 223, 223);
+        border: 1px solid gray;
         border-radius: 5px;
-        box-shadow: 1px 1px 3px gray;
         padding: 0 10px;
         font-size: 16px;
     }
@@ -375,8 +476,8 @@ body{
         width: 100%;
         height: 50px;
         border-radius: 5px;
-        background-color: blue;
-        border: 1px solid blue;
+        background-color: rgb(109, 109, 212);
+        border: 1px solid rgb(109, 109, 212);
         color: white;
         font-size: 20px;
         font-family: 'Roboto',sans-serif;
@@ -491,5 +592,4 @@ body{
         font-family:sans-serif;
     }
 }
-
 

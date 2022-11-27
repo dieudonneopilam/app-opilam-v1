@@ -57,6 +57,3 @@ Route::get('/horaire', function () {
 Route::get('/coupure', function () {
     return view('pages.pageCoupure');
 })->name('coupure');
-Route::get('/', function () {
-    return view('pages.home');
-});
