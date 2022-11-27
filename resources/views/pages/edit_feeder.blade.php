@@ -10,7 +10,6 @@
                 </a>
                 <p class="title" style="width: 80%;text-align: right">Modifier feeder</p>
             </div>
-            <img width="100%" height="auto" src="{{ secure_asset('img/snel.png') }}" alt="">
         </div>
         <form action="">
             <div class="group-form">

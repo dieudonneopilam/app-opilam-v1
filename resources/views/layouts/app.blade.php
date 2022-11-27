@@ -33,7 +33,7 @@
     <main class="main">
         @yield('main')
     </main>
-    <script src="{{ asset('/sw.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/sw.js') }}"></script>
     <script>
         if (!navigator.serviceWorker.controller) {
             navigator.serviceWorker.register("/sw.js").then(function (reg) {
