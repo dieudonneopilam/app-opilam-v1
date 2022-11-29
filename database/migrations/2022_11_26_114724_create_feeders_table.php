@@ -18,6 +18,8 @@ return new class extends Migration
             $table->mediumText('designation');
             $table->mediumText('ip');
             $table->integer('value');
+            $table->mediumText('name');
+            $table->mediumText('api');
             $table->timestamps();
         });
     }

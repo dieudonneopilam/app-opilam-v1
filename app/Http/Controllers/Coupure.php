@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Feeder;
 use Illuminate\Http\Request;
-
-class FeederController extends Controller
+use Illuminate\Support\Facades\Http;
+class Coupure extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,7 @@ class FeederController extends Controller
      */
     public function index()
     {
-        $feeders = Feeder::all();
-        return view('pages.feeders',[
-            'feeders' => $feeders
-        ]);
+
     }
 
     /**
@@ -27,7 +24,7 @@ class FeederController extends Controller
      */
     public function create()
     {
-        return view('pages.add_feeder');
+        //
     }
 
     /**
@@ -38,22 +35,7 @@ class FeederController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required'],
-            'ip' => ['required'],
-            'field' => ['required'],
-            'api' => ['required']
-        ]);
-
-        Feeder::create([
-            'designation' => $request->name,
-            'ip' => $request->ip,
-            'api' => $request->api,
-            'name' => $request->field,
-            'value' => -1
-        ]);
-
-        return redirect('/feeder');
+        //
     }
 
     /**
@@ -64,7 +46,35 @@ class FeederController extends Controller
      */
     public function show($id)
     {
-        //
+        $feeder = Feeder::findOrFail($id);
+        $url = $feeder->api;
+        $response = Http::connectTimeout(20)->get($url);
+
+        if ($response->successful()) {
+
+            $array []= $response->json();
+            $filedname = $feeder->name;
+
+            $field = $array[0] ["feeds"][1]["$filedname"];
+
+
+
+            if ($field!=null) {
+                $feeder->update([
+                    'value' => $field
+            ]);
+            }
+
+            $fieldvalue = $feeder->value;
+
+            return view('pages.pageCoupure',[
+                'feeder' => $feeder
+            ]);
+        }
+
+        return view('pages.pageCoupure',[
+            'feeder' => $feeder
+        ]);
     }
 
     /**
@@ -76,9 +86,24 @@ class FeederController extends Controller
     public function edit($id)
     {
         $feeder = Feeder::findOrFail($id);
-        return view('pages.edit_feeder',[
-            'feeder' => $feeder
-        ]);
+        $feederEtat = $feeder->value;
+
+        if($feederEtat!=1){
+            $value = 1;
+        }else{
+            $value=0;
+        }
+        $url = $feeder->ip.'='.$value;
+        $reponse = Http::connectTimeout(20)->get($url);
+
+        if($reponse->successful()){
+            $feeder->update([
+                'value' => $value
+            ]);
+            return redirect('/coupure/'.$id);
+        }
+
+        return redirect('/home');
     }
 
     /**
@@ -90,22 +115,7 @@ class FeederController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required'],
-            'ip' => ['required'],
-            'field' => ['required'],
-            'api' => ['required']
-        ]);
-
-        $feeder = Feeder::findOrFail($id);
-        $feeder->update([
-            'designation' => $request->name,
-            'ip' => $request->ip,
-            'api' => $request->api,
-            'name' => $request->field,
-        ]);
-
-        return redirect('/feeder');
+        //
     }
 
     /**

@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
-    @vite(['resources/sass/app.scss'])
+    @vite(['resources/sass/app.scss','resources/js/app'])
 </head>
 <body>
     @if(!Route::is('login'))
@@ -24,9 +24,29 @@
                 <p style="font-size: 30px;font-weight: 700">Snel</p>
             </div>
             <div class="div-profil">
-                <a href="{{ route('login') }}">
-                    <img class="profil" src="{{ secure_asset('img/profil.JPG') }}" alt="">
-                </a>
+                <div class="div-pro">
+                    <span href="#" class="div-profil">
+                        <span>{{ auth()->user()->name }}</span>
+                        <img class="profil profil-logout" src="{{ Storage::url(auth()->user()->file) }}" alt="">
+                    </span>
+
+                </div>
+                <div class="logout-menu">
+                    {{-- <p class="title">votre profil</p> --}}
+                    <ul>
+                        <li class="p"><img class="profil" src="{{ Storage::url(auth()->user()->file) }}" alt=""></li>
+                        <li class="p">{{ auth()->user()->name }}</li>
+                        <li class="p">{{ auth()->user()->email }}</li>
+                        <li class="p logoutuser">
+                            <a onclick="document.getElementById('logout-form').submit()" style="background-color: rgba(255, 255, 255, 0)" href="#">
+                                <form style="background-color: rgba(255, 255, 255, 0)" action="{{ route('logout') }}" method="POST" id="logout-form">@csrf
+                                    logout
+                                </form>
+                            </a>
+                        </li>
+                        <li class="p close"><a href="#">close</a></li>
+                    </ul>
+                </div>
             </div>
         </header>
     @endif

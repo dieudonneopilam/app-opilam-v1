@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('isadmin');
+            $table->boolean('isadmin')->default(0);
             $table->mediumText('sexe');
+            $table->mediumText('phone');
+            $table->mediumText('file');
             $table->rememberToken();
             $table->timestamps();
         });

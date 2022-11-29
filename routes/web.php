@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Coupure;
+use App\Http\Controllers\FeederController;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\HoraireController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,48 +19,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login', function () {
-    return view('pages.login');
-})->name('login');
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
-Route::get('/agents', function () {
-    return view('pages.agents');
-})->name('agents');
-Route::get('/add-agent', function () {
-    return view('pages.add_agent');
-})->name('add-agent');
-Route::get('/edit-agent', function () {
-    return view('pages.edit_agent');
-})->name('edit-agent');
-Route::get('/feeders', function () {
-    return view('pages.feeders');
-})->name('feeders');
-Route::get('/add-feeder', function () {
-    return view('pages.add_feeder');
-})->name('add-feeder');
-Route::get('/edit-feeder', function () {
-    return view('pages.edit_feeder');
-})->name('edit-feeder');
-Route::get('/add-horaire', function () {
-    return view('pages.add_horaire');
-})->name('add-horaire');
-Route::get('/edit-horaire', function () {
-    return view('pages.edit_horaire');
-})->name('edit-horaire');
-Route::get('/program', function () {
-    return view('pages.programmes');
-})->name('program');
-Route::get('/add-program', function () {
-    return view('pages.add_programme');
-})->name('add-program');
-Route::get('/edit-program', function () {
-    return view('pages.edit_programme');
-})->name('edit-program');
-Route::get('/horaire', function () {
-    return view('pages.horaire_feeder');
-})->name('horaire');
-Route::get('/coupure', function () {
-    return view('pages.pageCoupure');
-})->name('coupure');
+Route::redirect('/', '/home');
+
+Route::get('login',[AuthController::class,'login'])
+    ->name('login');
+
+Route::post('authentificate',[AuthController::class,'authentificate'])
+    ->name('authentificate');
+
+Route::post('logout',[AuthController::class,'logout'])
+    ->name('logout');
+
+Route::resource('user',UserController::class)
+    ->middleware('auth');
+Route::resource('home',Home::class)
+    ->middleware('auth');
+Route::resource('feeder',FeederController::class)
+    ->middleware('auth');
+Route::resource('programme',ProgramController::class)
+    ->middleware('auth');
+Route::resource('horaire',HoraireController::class)
+    ->middleware('auth');
+Route::get('horaire/{id}',[HoraireController::class,'deleteh'])
+    ->middleware('auth')
+    ->name('delete.horaire');
+Route::resource('coupure',Coupure::class)
+    ->middleware('auth');
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class Home extends Controller
@@ -13,7 +14,10 @@ class Home extends Controller
      */
     public function index()
     {
-        //
+        $programs = Program::all();
+        return view('pages.home',[
+            'programs' => $programs
+        ]);
     }
 
     /**
