@@ -45,4 +45,7 @@ Route::get('horaire/{id}',[HoraireController::class,'deleteh'])
     ->name('delete.horaire');
 Route::resource('coupure',Coupure::class)
     ->middleware('auth');
+Route::get('/faild',function(){
+    return view('errors.error500');
+})->name('faild');
 

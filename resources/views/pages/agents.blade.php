@@ -28,9 +28,14 @@
                     @endisset
                     </span></p>
                     <div class="div-btn">
-                        <a class="delete" href="">
-                            Supprimer
-                        </a>
+                        @if(auth()->user()->id != $user->id)
+                            <form class="delete" style="padding-top: 5px" action="{{ route('user.destroy',$user->id) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button style="background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);font-weight: 600">Supprimer</button>
+                            </form>
+                        @else
+
+                        @endif
                         <a class="edit" href="{{ route('user.edit',[$user->id]) }}">
                             modifier
                         </a>

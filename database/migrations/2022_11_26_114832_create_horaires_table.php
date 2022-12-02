@@ -18,7 +18,10 @@ return new class extends Migration
             $table->time('HeureDebut');
             $table->time('HeureFin');
             $table->mediumText('Type');
-            $table->foreignId('feeder_id')->constrained();
+            $table->foreignId('feeder_id')
+                    ->cascadeOnUpdate()
+                    ->cascadeOnDelete()
+                    ->constrained();
             $table->timestamps();
         });
     }

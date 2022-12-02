@@ -46,9 +46,12 @@ class Coupure extends Controller
      */
     public function show($id)
     {
-        $feeder = Feeder::findOrFail($id);
+        try {
+            $feeder = Feeder::findOrFail($id);
         $url = $feeder->api;
         $response = Http::connectTimeout(20)->get($url);
+
+        $response->throw();
 
         if ($response->successful()) {
 
@@ -72,9 +75,14 @@ class Coupure extends Controller
             ]);
         }
 
+
         return view('pages.pageCoupure',[
             'feeder' => $feeder
         ]);
+            //code...
+        } catch (\Throwable $th) {
+            return redirect()->route('faild');
+        }
     }
 
     /**
@@ -85,25 +93,30 @@ class Coupure extends Controller
      */
     public function edit($id)
     {
-        $feeder = Feeder::findOrFail($id);
-        $feederEtat = $feeder->value;
+        try {
+            $feeder = Feeder::findOrFail($id);
+            $feederEtat = $feeder->value;
 
-        if($feederEtat!=1){
-            $value = 1;
-        }else{
-            $value=0;
+            if($feederEtat!=1){
+                $value = 1;
+            }else{
+                $value=0;
+            }
+            $url = $feeder->ip.'='.$value;
+            $reponse = Http::connectTimeout(20)->get($url);
+
+            if($reponse->successful()){
+                $feeder->update([
+                    'value' => $value
+                ]);
+                return redirect('/coupure/'.$id);
+            }
+
+            return redirect('/home');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('faild');
         }
-        $url = $feeder->ip.'='.$value;
-        $reponse = Http::connectTimeout(20)->get($url);
-
-        if($reponse->successful()){
-            $feeder->update([
-                'value' => $value
-            ]);
-            return redirect('/coupure/'.$id);
-        }
-
-        return redirect('/home');
     }
 
     /**

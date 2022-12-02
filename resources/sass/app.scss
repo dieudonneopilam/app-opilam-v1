@@ -21,6 +21,11 @@
     display: block;
     transition: 5000ms;
 }
+.hidden-name{
+    @media screen and (max-width:400px) {
+        display: none;
+    }
+}
 .logout-menu{
     width: 250px;
     background-color: rgb(255, 255, 255);

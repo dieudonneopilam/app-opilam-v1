@@ -14,7 +14,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
     @vite(['resources/sass/app.scss','resources/js/app'])
+    <link rel="stylesheet" href="{{ secure_asset('build/assets/app.d3120728.css') }}">
 </head>
 <body>
     @if(!Route::is('login'))
@@ -26,7 +28,7 @@
             <div class="div-profil">
                 <div class="div-pro">
                     <span href="#" class="div-profil">
-                        <span>{{ auth()->user()->name }}</span>
+                        <span class="hidden-name">{{ auth()->user()->name }}</span>
                         <img class="profil profil-logout" src="{{ Storage::url(auth()->user()->file) }}" alt="">
                     </span>
 
@@ -53,6 +55,8 @@
     <main class="main">
         @yield('main')
     </main>
+    <script src="{{ asset('build/assets/app.1d33c02a.js') }}"></script>
+    <script src="{{ asset('build/assets/app.7c3c19f8.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/sw.js') }}"></script>
     <script>
         if (!navigator.serviceWorker.controller) {

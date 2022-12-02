@@ -124,5 +124,8 @@ class ProgramController extends Controller
     public function destroy($id)
     {
         //
+        $program = Feeder::findOrFail($id);
+        $program->delete();
+        dd('delete');
     }
 }

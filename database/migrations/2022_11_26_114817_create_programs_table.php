@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('feeder_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('feeder_id')
+                    ->cascadeOnUpdate()
+                    ->cascadeOnDelete()
+                    ->constrained();
+            $table->foreignId('user_id')
+                  ->cascadeOnUpdate()
+                  ->cascadeOnDelete()
+                  ->constrained();
             $table->dateTime('dateP');
             $table->timestamps();
         });
