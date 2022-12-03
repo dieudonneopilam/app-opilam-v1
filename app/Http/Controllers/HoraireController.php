@@ -66,10 +66,11 @@ class HoraireController extends Controller
     public function show($id)
     {
         $horaires = Horaire::where('feeder_id',$id)->get();
-
+        $name = Feeder::findOrFail($id)->designation;
         return view('pages.horaire_feeder',[
             'horaires' => $horaires,
-            'id' => $id
+            'id' => $id,
+            'name' => $name
         ]);
     }
 
@@ -123,16 +124,10 @@ class HoraireController extends Controller
     {
 
 
-        //return redirect()->route('horaire.show',$idd);
-    }
-    public function deleteh($id)
-    {
-        dd($id);
-        // $horaire = Horaire::findOrFail($id);
-        // dd($horaire);
-        // $idd = $horaire->feeder_id;
-        // $horaire->delete();
+        $horaire = Horaire::findOrFail($id);
+        $idd = $horaire->feeder_id;
+        $horaire->delete();
 
-        //return redirect()->route('horaire.show',$idd);
+        return redirect()->route('horaire.show',$idd);
     }
 }

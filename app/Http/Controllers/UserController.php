@@ -151,6 +151,7 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($id);
+        $user->program->delete();
         $user->delete();
         return redirect('/user');
     }

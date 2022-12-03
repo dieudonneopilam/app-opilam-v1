@@ -49,7 +49,7 @@ class Coupure extends Controller
         try {
             $feeder = Feeder::findOrFail($id);
         $url = $feeder->api;
-        $response = Http::connectTimeout(20)->get($url);
+        $response = Http::connectTimeout(5)->get($url);
 
         $response->throw();
 
@@ -103,7 +103,7 @@ class Coupure extends Controller
                 $value=0;
             }
             $url = $feeder->ip.'='.$value;
-            $reponse = Http::connectTimeout(20)->get($url);
+            $reponse = Http::connectTimeout(5)->get($url);
 
             if($reponse->successful()){
                 $feeder->update([

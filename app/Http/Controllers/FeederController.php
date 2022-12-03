@@ -117,6 +117,7 @@ class FeederController extends Controller
     public function destroy($id)
     {
         $feeder = Feeder::findOrFail($id);
+        $feeder->program->delete();
         $feeder->delete();
         return redirect('/feeder');
     }

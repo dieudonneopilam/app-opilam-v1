@@ -40,9 +40,6 @@ Route::resource('programme',ProgramController::class)
     ->middleware('auth');
 Route::resource('horaire',HoraireController::class)
     ->middleware('auth');
-Route::get('horaire/{id}',[HoraireController::class,'deleteh'])
-    ->middleware('auth')
-    ->name('delete.horaire');
 Route::resource('coupure',Coupure::class)
     ->middleware('auth');
 Route::get('/faild',function(){

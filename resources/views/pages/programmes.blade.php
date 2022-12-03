@@ -22,9 +22,10 @@
                 <div class="names">
                     <p class="name-agent">{{ $program->user->name }}<br> <span style="font-size: 14px">{{ $program->feeder->designation }}</span></p>
                     <div class="div-btn">
-                        <a class="delete" href="">
-                            Supprimer
-                        </a>
+                        <form class="delete" style="padding-top: 5px" action="{{ route('programme.destroy',$program->id) }}" method="POST">
+                            @csrf @method('DELETE')
+                            <button style="background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);font-weight: 600;font-size: 16px">Supprimer</button>
+                        </form>
                         <a class="edit" href="{{ route('programme.edit',$program->id) }}">
                             modifier
                         </a>
